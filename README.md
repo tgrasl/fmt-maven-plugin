@@ -1,6 +1,6 @@
 ## fmt-maven-plugin
 
-Formats your code following [google-java-format](https://github.com/google/google-java-format) which follows [Google's code styleguide](https://google.github.io/styleguide/javaguide.html).
+Formats your code using [google-java-format](https://github.com/google/google-java-format) which follows [Google's code styleguide](https://google.github.io/styleguide/javaguide.html).
 
 The format cannot be configured by design.
 
