@@ -32,7 +32,9 @@ Add to your pom.xml
             </plugin>
         </plugins>
     </build>
-``` 
+```
+
+### Options
 
 `sourceDirectory` represents the directory where your Java sources that need to be formatted are contained. It defaults to `${project.build.sourceDirectory}`
 
@@ -42,38 +44,34 @@ Add to your pom.xml
 
 `verbose` is whether the plugin should print a line for every file that is being formatted. It defaults to `false`.
 
-### Configured pom.xml
-
-
-pom.xml with sample configuration:
-
+example:
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.coveo</groupId>
+            <artifactId>fmt-maven-plugin</artifactId>
+            <version>1.0</version>
+            <configuration>
+                <sourceDirectory>some/source/directory</sourceDirectory>
+                <testSourceDirectory>some/test/directory</testSourceDirectory>
+                <verbose>true</verbose>
+                <additionalSourceDirectories>
+                    <param>some/dir</param>
+                    <param>some/other/dir</param>
+                </additionalSourceDirectories>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>format</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.coveo</groupId>
-                <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.0</version>
-                <configuration>
-                    <sourceDirectory>some/source/directory</sourceDirectory>
-                    <testSourceDirectory>some/test/directory</testSourceDirectory>
-                    <verbose>true</verbose>
-                    <additionalSourceDirectories>
-                        <param>some/dir</param>
-                        <param>some/other/dir</param>
-                    </additionalSourceDirectories>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-``` 
 
 ### Command line
 
@@ -83,3 +81,13 @@ You can also use it on the command line
 
 You can pass parameters via standard `-D` syntax.
 `mvn com.coveo:fmt-maven-plugin:format -Dverbose=true`
+
+
+### Deploy
+
+```
+git tag v0.0.0
+
+mvn versions:set -DnewVersion=0.0.0
+mvn clean deploy -P release
+```
