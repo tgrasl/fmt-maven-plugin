@@ -31,10 +31,10 @@ Add to your pom.xml
 
 `verbose` is whether the plugin should print a line for every file that is being formatted. It defaults to `false`.
 
-### Full pom.xml
+### Configured pom.xml
 
 
-pom.xml with all available parameters:
+pom.xml with sample configuration:
 
 ```
     <build>
