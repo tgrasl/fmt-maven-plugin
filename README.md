@@ -1,6 +1,6 @@
 ## Usage
 
-### Pom.xml
+### Standard pom.xml
 
 Add to your pom.xml
 
@@ -23,7 +23,18 @@ Add to your pom.xml
     </build>
 ``` 
 
-With all available parameters:
+`sourceDirectory` represents the directory where your Java sources that need to be formatted are contained. It defaults to `${project.build.sourceDirectory}`
+
+`testSourceDirectory` represents the directory where your test's Java sources that need to be formatted are contained. It defaults to `${project.build.testSourceDirectory}`
+
+`additionalSourceDirectories` represents a list of additional directories that contains Java sources that need to be formatted. It defaults to an empty list.
+
+`verbose` is whether the plugin should print a line for every file that is being formatted. It defaults to `false`.
+
+### Full pom.xml
+
+
+pom.xml with all available parameters:
 
 ```
     <build>
@@ -52,11 +63,6 @@ With all available parameters:
         </plugins>
     </build>
 ``` 
-
-`sourceDirectory` represents the directory where your Java sources that need to be formatted are contained. It defaults to `${project.build.sourceDirectory}`
-`testSourceDirectory` represents the directory where your test's Java sources that need to be formatted are contained. It defaults to `${project.build.testSourceDirectory}`
-`additionalSourceDirectories` represents a list of additional directories that contains Java sources that need to be formatted. It defaults to an empty list.
-`verbose` is whether the plugin should print a line for every file that is being formatted. It defaults to `false`.
 
 ### Command line
 
