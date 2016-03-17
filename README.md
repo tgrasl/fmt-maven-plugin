@@ -10,7 +10,7 @@ Add to your pom.xml
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -42,7 +42,7 @@ pom.xml with all available parameters:
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <configuration>
                     <sourceDirectory>some/source/directory</sourceDirectory>
                     <testSourceDirectory>some/test/directory</testSourceDirectory>
