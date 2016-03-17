@@ -4,6 +4,11 @@ Formats your code following [google-java-format](https://github.com/google/googl
 
 The format cannot be configured by design.
 
+If you want your IDE to stick to the same format, check out [the available configuration files](https://github.com/google/styleguide)
+
+* [Eclipse](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml)
+* [IntelliJ IDEA](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)
+
 ## Usage
 
 ### Standard pom.xml
