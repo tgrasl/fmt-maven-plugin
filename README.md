@@ -1,4 +1,4 @@
-## fmt-maven-plugin
+## fmt-maven-plugin [![Build Status](https://travis-ci.org/coveo/fmt-maven-plugin.svg?branch=master)](https://travis-ci.org/coveo/fmt-maven-plugin)
 
 Formats your code using [google-java-format](https://github.com/google/google-java-format) which follows [Google's code styleguide](https://google.github.io/styleguide/javaguide.html).
 
