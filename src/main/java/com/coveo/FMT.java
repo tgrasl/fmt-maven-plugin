@@ -37,6 +37,12 @@ import com.google.common.io.Files;
 import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
 
+/**
+ * <p>FMT class.</p>
+ *
+ * @author guisim
+ * @version $Id: $Id
+ */
 @Mojo(name = "format", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class FMT extends AbstractMojo {
   private Log logger = getLog();
@@ -67,6 +73,12 @@ public class FMT extends AbstractMojo {
 
   private List<String> filesFormatted = new ArrayList<String>();
 
+    /**
+     * <p>execute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
   public void execute() throws MojoExecutionException, MojoFailureException {
     List<File> directoriesToFormat = new ArrayList<File>();
     if (sourceDirectory.exists()) {
@@ -95,6 +107,11 @@ public class FMT extends AbstractMojo {
     logNumberOfFilesFormatted();
   }
 
+    /**
+     * <p>Getter for the field <code>filesFormatted</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
   public List<String> getFilesFormatted() {
     return filesFormatted;
   }
