@@ -1,4 +1,4 @@
-package com.github.coveo;
+package com.coveo;
 
 /*
  * Copyright 2001-2005 The Apache Software Foundation.

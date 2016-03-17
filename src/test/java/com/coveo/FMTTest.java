@@ -1,4 +1,4 @@
-package com.github.coveo;
+package com.coveo;
 
 import static com.google.common.truth.Truth.*;
 
