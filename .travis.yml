@@ -7,9 +7,7 @@ cache:
   - "$HOME/.m2/repository"
 test:
 - mvn versions:display-dependency-updates
-- mvn install
-- ls
-
+- mvn test
 
 deploy:
   provider: releases
