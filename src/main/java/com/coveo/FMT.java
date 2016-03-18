@@ -73,12 +73,12 @@ public class FMT extends AbstractMojo {
 
   private List<String> filesFormatted = new ArrayList<String>();
 
-    /**
-     * <p>execute.</p>
-     *
-     * @throws org.apache.maven.plugin.MojoExecutionException if any.
-     * @throws org.apache.maven.plugin.MojoFailureException if any.
-     */
+  /**
+   * <p>execute.</p>
+   *
+   * @throws org.apache.maven.plugin.MojoExecutionException if any.
+   * @throws org.apache.maven.plugin.MojoFailureException if any.
+   */
   public void execute() throws MojoExecutionException, MojoFailureException {
     List<File> directoriesToFormat = new ArrayList<File>();
     if (sourceDirectory.exists()) {
@@ -107,11 +107,11 @@ public class FMT extends AbstractMojo {
     logNumberOfFilesFormatted();
   }
 
-    /**
-     * <p>Getter for the field <code>filesFormatted</code>.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
+  /**
+   * <p>Getter for the field <code>filesFormatted</code>.</p>
+   *
+   * @return a {@link java.util.List} object.
+   */
   public List<String> getFilesFormatted() {
     return filesFormatted;
   }

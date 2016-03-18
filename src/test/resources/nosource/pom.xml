@@ -5,7 +5,7 @@
 
     <groupId>org.apache.maven.plugin.my.unit</groupId>
     <artifactId>project-to-test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>Test MyMojo</name>
 
@@ -23,10 +23,7 @@
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <configuration>
-
-                </configuration>
+                <version>1.0.0</version>
                 <executions>
                     <execution>
                         <goals>
