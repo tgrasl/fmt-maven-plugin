@@ -15,7 +15,7 @@ deploy:
   provider: releases
   api_key:
     secure: 0yw7mnNLc58IRcV+I3l+F+wiPwwa+hVBM7f90OvMOFXEnhegXEZIapst/MIJmgDMNV20icpcFZdP9F1tmtkmPxacd6U0intzFc5XjR2rEulxMhs9og9PQvrhs9H1Woom0C4Vq2v3X+12IRayD6sfvHWe0YdfmSEXEfPml21ww309Fhe5UgcFxeVQh8TEYdcikztGcuhZFEWwhw8kJTKEmgZG/AJIFAujsFx/8Grw3kKr8CfUWmEmaFT2vQTUOESKlRljO3BrDb752cjzMW5IBET7GO5ez1g8IoEvA1MNVIHy49Pp4c2ADEqGSVkLk16VeTn7l1eHkRDp7yueZxrsFw01EI08u2l0dZftExim7dt48cWdVvhnrbsSKMrt4vrEG4Yk7N+AmXc48DXRWD/+PuodLvQgS3s9EV9m4nI6HebkzB+6lMcY4mz7qfZiCdgX2dXFkJwd+exXTh80wyFh0dkgr5/ka4E3kRbA3KTwpc+FZSx98V6fRluQfoUWA390uOjRgO1ybI+f0OYCWY5KTcJzY1yejDKHV7ACikYZS/Eb2KY1UHE3f4rN/sLYLXxqiKiv9KcOUk/SwWU3f2k+TbyOQgikzAyigT5XB39D1fAIDzzAsCXMjwgp3r7rz0i1rbHMp9JoWzqb3GG3Qv2BbbWvPJHuj4jS7/2ySkipYDk=
-  file:target/*.jar
+  file: target/*.jar
   file_glob: true
 
   on:
