@@ -15,7 +15,7 @@ If you want your IDE to stick to the same format, check out [the available confi
 
 Add to your pom.xml
 
-```
+```xml
     <build>
         <plugins>
             <plugin>
