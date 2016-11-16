@@ -1,6 +1,5 @@
 package com.coveo;
 
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -31,146 +30,146 @@ import com.google.googlejavaformat.java.FormatterException;
  */
 @Mojo(name = "format", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class FMT extends AbstractMojo {
-    private Log logger = getLog();
-    private Formatter formatter = new Formatter();
+  private Log logger = getLog();
+  private Formatter formatter = new Formatter();
 
-    @Parameter(
-            defaultValue = "${project.build.sourceDirectory}",
-            property = "sourceDirectory",
-            required = true
-    )
-    private File sourceDirectory;
+  @Parameter(
+    defaultValue = "${project.build.sourceDirectory}",
+    property = "sourceDirectory",
+    required = true
+  )
+  private File sourceDirectory;
 
-    @Parameter(
-            defaultValue = "${project.build.testSourceDirectory}",
-            property = "testSourceDirectory",
-            required = true
-    )
-    private File testSourceDirectory;
+  @Parameter(
+    defaultValue = "${project.build.testSourceDirectory}",
+    property = "testSourceDirectory",
+    required = true
+  )
+  private File testSourceDirectory;
 
-    @Parameter(property = "additionalSourceDirectories")
-    private File[] additionalSourceDirectories;
+  @Parameter(property = "additionalSourceDirectories")
+  private File[] additionalSourceDirectories;
 
-    @Parameter(defaultValue = "false", property = "verbose")
-    private boolean verbose;
+  @Parameter(defaultValue = "false", property = "verbose")
+  private boolean verbose;
 
-    @Parameter(defaultValue = "false", property = "failOnUnknownFolder")
-    private boolean failOnUnknownFolder;
+  @Parameter(defaultValue = "false", property = "failOnUnknownFolder")
+  private boolean failOnUnknownFolder;
 
-    @Parameter(defaultValue = ".*", property = "filterOnPattern")
-    private String filterOnPattern;
+  @Parameter(defaultValue = ".*", property = "filterOnPattern")
+  private String filterOnPattern;
 
-    private List<String> filesFormatted = new ArrayList<String>();
+  private List<String> filesFormatted = new ArrayList<String>();
 
-    /**
-     * <p>execute.</p>
-     *
-     * @throws org.apache.maven.plugin.MojoExecutionException if any.
-     */
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        List<File> directoriesToFormat = new ArrayList<File>();
-        if (sourceDirectory.exists()) {
-            directoriesToFormat.add(sourceDirectory);
-        } else {
-            handleMissingDirectory("Source", sourceDirectory);
-        }
-        if (testSourceDirectory.exists()) {
-            directoriesToFormat.add(testSourceDirectory);
-        } else {
-            handleMissingDirectory("Test source", testSourceDirectory);
-        }
+  /**
+   * <p>execute.</p>
+   *
+   * @throws org.apache.maven.plugin.MojoExecutionException if any.
+   */
+  public void execute() throws MojoExecutionException, MojoFailureException {
+    List<File> directoriesToFormat = new ArrayList<File>();
+    if (sourceDirectory.exists()) {
+      directoriesToFormat.add(sourceDirectory);
+    } else {
+      handleMissingDirectory("Source", sourceDirectory);
+    }
+    if (testSourceDirectory.exists()) {
+      directoriesToFormat.add(testSourceDirectory);
+    } else {
+      handleMissingDirectory("Test source", testSourceDirectory);
+    }
 
-        for (File additionalSourceDirectory : additionalSourceDirectories) {
-            if (additionalSourceDirectory.exists()) {
-                directoriesToFormat.add(additionalSourceDirectory);
-            } else {
-                handleMissingDirectory("Additional source", additionalSourceDirectory);
-            }
-        }
+    for (File additionalSourceDirectory : additionalSourceDirectories) {
+      if (additionalSourceDirectory.exists()) {
+        directoriesToFormat.add(additionalSourceDirectory);
+      } else {
+        handleMissingDirectory("Additional source", additionalSourceDirectory);
+      }
+    }
 
-        for (File directoryToFormat : directoriesToFormat) {
-            formatSourceFilesInDirectory(directoryToFormat);
-        }
+    for (File directoryToFormat : directoriesToFormat) {
+      formatSourceFilesInDirectory(directoryToFormat);
+    }
 
+    logNumberOfFilesFormatted();
+  }
+
+  /**
+   * <p>Getter for the field <code>filesFormatted</code>.</p>
+   *
+   * @return a {@link java.util.List} object.
+   */
+  public List<String> getFilesFormatted() {
+    return filesFormatted;
+  }
+
+  private void formatSourceFilesInDirectory(File directory) {
+    if (!directory.isDirectory()) {
+      logger.info("Directory '" + directory + "' is not a directory. Skipping.");
+      return;
+    }
+
+    List<File> files = Arrays.asList(directory.listFiles(getFilenameFilter()));
+    for (File file : files) {
+      if (file.isDirectory()) {
+        formatSourceFilesInDirectory(file);
+      } else {
+        formatSourceFile(file);
+      }
+    }
+  }
+
+  private FilenameFilter getFilenameFilter() {
+    return new FilenameFilter() {
+      @Override
+      public boolean accept(File dir, String name) {
+        return name.matches(filterOnPattern);
+      }
+    };
+  }
+
+  private void formatSourceFile(File file) {
+    if (file.isDirectory()) {
+      logger.info("File '" + file + "' is a directory. Skipping.");
+      return;
+    }
+
+    if (verbose) {
+      logger.debug("Formatting '" + file + "'.");
+    }
+
+    CharSource source = Files.asCharSource(file, Charsets.UTF_8);
+    CharSink sink = Files.asCharSink(file, Charsets.UTF_8);
+    try {
+      formatter.formatSource(source, sink);
+      filesFormatted.add(file.getAbsolutePath());
+      if (filesFormatted.size() % 100 == 0) {
         logNumberOfFilesFormatted();
+      }
+    } catch (FormatterException e) {
+      logger.warn("Failed to format file '" + file + "'.", e);
+    } catch (IOException e) {
+      logger.warn("Failed to format file '" + file + "'.", e);
     }
+  }
 
-    /**
-     * <p>Getter for the field <code>filesFormatted</code>.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public List<String> getFilesFormatted() {
-        return filesFormatted;
+  private void handleMissingDirectory(String directoryDisplayName, File directory)
+      throws MojoFailureException {
+    if (failOnUnknownFolder) {
+      String message =
+          directoryDisplayName
+              + " directory '"
+              + directory
+              + "' does not exist, failing build (failOnUnknownFolder is true).";
+      logger.error(message);
+      throw new MojoFailureException(message);
+    } else {
+      logger.warn(
+          directoryDisplayName + " directory '" + directory + "' does not exist, ignoring.");
     }
+  }
 
-    private void formatSourceFilesInDirectory(File directory) {
-        if (!directory.isDirectory()) {
-            logger.info("Directory '" + directory + "' is not a directory. Skipping.");
-            return;
-        }
-
-        List<File> files = Arrays.asList(directory.listFiles(getFilenameFilter()));
-        for (File file : files) {
-            if (file.isDirectory()) {
-                formatSourceFilesInDirectory(file);
-            } else {
-                formatSourceFile(file);
-            }
-        }
-    }
-
-    private FilenameFilter getFilenameFilter() {
-        return new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.matches(filterOnPattern);
-            }
-        };
-    }
-
-    private void formatSourceFile(File file) {
-        if (file.isDirectory()) {
-            logger.info("File '" + file + "' is a directory. Skipping.");
-            return;
-        }
-
-        if (verbose) {
-            logger.debug("Formatting '" + file + "'.");
-        }
-
-        CharSource source = Files.asCharSource(file, Charsets.UTF_8);
-        CharSink sink = Files.asCharSink(file, Charsets.UTF_8);
-        try {
-            formatter.formatSource(source, sink);
-            filesFormatted.add(file.getAbsolutePath());
-            if (filesFormatted.size() % 100 == 0) {
-                logNumberOfFilesFormatted();
-            }
-        } catch (FormatterException e) {
-            logger.warn("Failed to format file '" + file + "'.", e);
-        } catch (IOException e) {
-            logger.warn("Failed to format file '" + file + "'.", e);
-        }
-    }
-
-    private void handleMissingDirectory(String directoryDisplayName, File directory)
-            throws MojoFailureException {
-        if (failOnUnknownFolder) {
-            String message =
-                    directoryDisplayName
-                            + " directory '"
-                            + directory
-                            + "' does not exist, failing build (failOnUnknownFolder is true).";
-            logger.error(message);
-            throw new MojoFailureException(message);
-        } else {
-            logger.warn(
-                    directoryDisplayName + " directory '" + directory + "' does not exist, ignoring.");
-        }
-    }
-
-    private void logNumberOfFilesFormatted() {
-        logger.info("Successfully formatted " + filesFormatted.size() + " files.");
-    }
+  private void logNumberOfFilesFormatted() {
+    logger.info("Successfully formatted " + filesFormatted.size() + " files.");
+  }
 }
