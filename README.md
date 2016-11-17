@@ -1,4 +1,8 @@
-## fmt-maven-plugin [![Build Status](https://travis-ci.org/coveo/fmt-maven-plugin.svg?branch=master)](https://travis-ci.org/coveo/fmt-maven-plugin)
+[![Build Status](https://travis-ci.org/coveo/fmt-maven-plugin.svg?branch=master)](https://travis-ci.org/coveo/fmt-maven-plugin)
+[![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/coveo/fmt-maven-plugin/blob/master/LICENSE)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.coveo/fmt-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.coveo/fmt-maven-plugin)
+
+## fmt-maven-plugin 
 
 Formats your code using [google-java-format](https://github.com/google/google-java-format) which follows [Google's code styleguide](https://google.github.io/styleguide/javaguide.html).
 
