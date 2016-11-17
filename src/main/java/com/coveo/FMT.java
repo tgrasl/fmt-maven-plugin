@@ -1,6 +1,7 @@
 package com.coveo;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,13 +56,15 @@ public class FMT extends AbstractMojo {
   @Parameter(defaultValue = "false", property = "failOnUnknownFolder")
   private boolean failOnUnknownFolder;
 
+  @Parameter(defaultValue = ".*\\.java", property = "filesNamePattern")
+  private String filesNamePattern;
+
   private List<String> filesFormatted = new ArrayList<String>();
 
   /**
    * <p>execute.</p>
    *
    * @throws org.apache.maven.plugin.MojoExecutionException if any.
-   * @throws org.apache.maven.plugin.MojoFailureException if any.
    */
   public void execute() throws MojoExecutionException, MojoFailureException {
     List<File> directoriesToFormat = new ArrayList<File>();
@@ -106,7 +109,7 @@ public class FMT extends AbstractMojo {
       return;
     }
 
-    List<File> files = Arrays.asList(directory.listFiles());
+    List<File> files = Arrays.asList(directory.listFiles(getFileFilter()));
     for (File file : files) {
       if (file.isDirectory()) {
         formatSourceFilesInDirectory(file);
@@ -114,6 +117,18 @@ public class FMT extends AbstractMojo {
         formatSourceFile(file);
       }
     }
+  }
+
+  private FileFilter getFileFilter() {
+    if (verbose) {
+      logger.debug("Filter files on '" + filesNamePattern + "'.");
+    }
+    return new FileFilter() {
+      @Override
+      public boolean accept(File pathname) {
+        return pathname.isDirectory() || pathname.getName().matches(filesNamePattern);
+      }
+    };
   }
 
   private void formatSourceFile(File file) {

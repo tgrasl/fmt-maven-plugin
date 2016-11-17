@@ -68,6 +68,14 @@ public class FMTTest {
     assertThat(fmt.getFilesFormatted()).hasSize(8);
   }
 
+  @Test
+  public void withOnlyAvajFiles() throws Exception {
+    FMT fmt = (FMT) mojoRule.lookupConfiguredMojo(loadPom("onlyavajsources"), FORMAT);
+    fmt.execute();
+
+    assertThat(fmt.getFilesFormatted()).hasSize(1);
+  }
+
   public File loadPom(String folderName) {
     return new File("src/test/resources/", folderName);
   }
