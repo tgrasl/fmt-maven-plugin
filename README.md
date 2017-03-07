@@ -25,7 +25,7 @@ Add to your pom.xml
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>1.5.0</version>
                 <executions>
                     <execution>
                         <goals>
