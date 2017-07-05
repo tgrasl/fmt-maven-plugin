@@ -6,6 +6,9 @@ import com.google.common.io.CharSource;
 import com.google.common.io.Files;
 import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
+import com.google.googlejavaformat.java.ImportOrderer;
+import com.google.googlejavaformat.java.RemoveUnusedImports;
+import com.google.googlejavaformat.java.RemoveUnusedImports.JavadocOnlyImports;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -149,10 +152,12 @@ public class FMT extends AbstractMojo {
     CharSink sink = Files.asCharSink(file, Charsets.UTF_8);
     try {
       String input = source.read();
-      String output = formatter.formatSource(input);
-      if (!input.equals(output)) {
+      String formatted = formatter.formatSource(input);
+      formatted = RemoveUnusedImports.removeUnusedImports(formatted, JavadocOnlyImports.KEEP);
+      formatted = ImportOrderer.reorderImports(formatted);
+      if (!input.equals(formatted)) {
         if (!validateOnly) {
-          sink.write(output);
+          sink.write(formatted);
         }
         nonComplyingFiles += 1;
       }

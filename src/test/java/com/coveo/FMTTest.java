@@ -88,6 +88,24 @@ public class FMTTest {
     fmt.execute();
   }
 
+  @Test(expected = MojoFailureException.class)
+  public void withUnusedImports() throws Exception {
+    FMT fmt = (FMT) mojoRule.lookupConfiguredMojo(loadPom("importunused"), FORMAT);
+    fmt.execute();
+  }
+
+  @Test(expected = MojoFailureException.class)
+  public void withUnsortedImports() throws Exception {
+    FMT fmt = (FMT) mojoRule.lookupConfiguredMojo(loadPom("importunsorted"), FORMAT);
+    fmt.execute();
+  }
+
+  @Test
+  public void withCleanImports() throws Exception {
+    FMT fmt = (FMT) mojoRule.lookupConfiguredMojo(loadPom("importclean"), FORMAT);
+    fmt.execute();
+  }
+
   public File loadPom(String folderName) {
     return new File("src/test/resources/", folderName);
   }
