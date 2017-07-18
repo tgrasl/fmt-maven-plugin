@@ -17,7 +17,7 @@ If you want your IDE to stick to the same format, check out [the available confi
 
 ### Standard pom.xml
 
-Add to your pom.xml
+To have your sources automatically formatted on each build, add to your pom.xml:
 
 ```xml
     <build>
@@ -25,11 +25,32 @@ Add to your pom.xml
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+If you prefer, you can only check formatting at build time using the `check` goal:
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.coveo</groupId>
+                <artifactId>fmt-maven-plugin</artifactId>
+                <version>1.8.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -57,7 +78,7 @@ example:
         <plugin>
             <groupId>com.coveo</groupId>
             <artifactId>fmt-maven-plugin</artifactId>
-            <version>1.7.0</version>
+            <version>1.8.0</version>
             <configuration>
                 <sourceDirectory>some/source/directory</sourceDirectory>
                 <testSourceDirectory>some/test/directory</testSourceDirectory>
