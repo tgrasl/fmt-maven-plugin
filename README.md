@@ -71,6 +71,8 @@ If you prefer, you can only check formatting at build time using the `check` goa
 
 `filesNamePattern` represents the pattern that filters files to format. The defaults value is set to `.*\.java`.
 
+`skip` is whether the plugin should skip the operation.
+
 `style` sets the formatter style to be _google_ or _aosp_. By default this is 'google'. Projects using Android conventions may prefer `aosp`.
 
 example:
@@ -90,6 +92,7 @@ example:
                     <param>some/dir</param>
                     <param>some/other/dir</param>
                 </additionalSourceDirectories>
+                <skip>false</skip>
                 <style>google</style>
             </configuration>
             <executions>
@@ -168,6 +171,8 @@ You can also use it on the command line
 
 You can pass parameters via standard `-D` syntax.
 `mvn com.coveo:fmt-maven-plugin:format -Dverbose=true`
+
+`-Dfmt.skip` is whether the plugin should skip the operation.
 
 
 ### Deploy
