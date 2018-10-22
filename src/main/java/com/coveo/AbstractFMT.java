@@ -133,12 +133,13 @@ public abstract class AbstractFMT extends AbstractMojo {
     }
 
     try (Stream<Path> paths = Files.walk(Paths.get(directory.getPath()))) {
+      FileFilter fileFilter = getFileFilter();
       paths
           .collect(Collectors.toList())
           .parallelStream()
           .filter(Files::isRegularFile)
           .map(Path::toFile)
-          .filter((file) -> getFileFilter().accept(file))
+          .filter((file) -> fileFilter.accept(file))
           .forEach(file -> formatSourceFile(file, formatter));
     } catch (IOException exception) {
       throw new MojoFailureException(exception.getMessage());
