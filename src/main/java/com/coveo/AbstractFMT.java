@@ -171,7 +171,7 @@ public abstract class AbstractFMT extends AbstractMojo {
     return new FileFilter() {
       @Override
       public boolean accept(File pathname) {
-        return pathname.isDirectory() || pathname.getName().matches(filesNamePattern);
+        return pathname.isDirectory() || pathname.getPath().matches(filesNamePattern);
       }
     };
   }
