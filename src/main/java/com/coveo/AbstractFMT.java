@@ -38,12 +38,9 @@ public abstract class AbstractFMT extends AbstractMojo {
   )
   private File testSourceDirectory;
 
-  @Parameter(
-    defaultValue = "${project.packaging}",
-    required = true
-  )
+  @Parameter(defaultValue = "${project.packaging}", required = true)
   private String packaging;
-  
+
   @Parameter(property = "additionalSourceDirectories")
   private File[] additionalSourceDirectories;
 
