@@ -53,6 +53,9 @@ public abstract class AbstractFMT extends AbstractMojo {
   @Parameter(defaultValue = ".*\\.java", property = "filesNamePattern")
   private String filesNamePattern;
 
+  @Parameter(defaultValue = ".*", property = "filesPathPattern")
+  private String filesPathPattern;
+
   @Parameter(defaultValue = "false", property = "fmt.skip")
   private boolean skip = false;
 
@@ -140,12 +143,15 @@ public abstract class AbstractFMT extends AbstractMojo {
     }
 
     try (Stream<Path> paths = Files.walk(Paths.get(directory.getPath()))) {
+      FileFilter fileNameFilter = getFileNameFilter();
+      FileFilter pathFilter = getPathFilter();
       paths
           .collect(Collectors.toList())
           .parallelStream()
           .filter(Files::isRegularFile)
           .map(Path::toFile)
-          .filter((file) -> getFileFilter().accept(file))
+          .filter(fileNameFilter::accept)
+          .filter(pathFilter::accept)
           .forEach(file -> formatSourceFile(file, formatter));
     } catch (IOException exception) {
       throw new MojoFailureException(exception.getMessage());
@@ -170,16 +176,18 @@ public abstract class AbstractFMT extends AbstractMojo {
     return new Formatter(JavaFormatterOptions.builder().style(style()).build());
   }
 
-  private FileFilter getFileFilter() {
+  private FileFilter getFileNameFilter() {
     if (verbose) {
       getLog().debug("Filter files on '" + filesNamePattern + "'.");
     }
-    return new FileFilter() {
-      @Override
-      public boolean accept(File pathname) {
-        return pathname.isDirectory() || pathname.getName().matches(filesNamePattern);
-      }
-    };
+    return pathname -> pathname.isDirectory() || pathname.getName().matches(filesNamePattern);
+  }
+
+  private FileFilter getPathFilter() {
+    if (verbose) {
+      getLog().debug("Filter paths on '" + filesPathPattern + "'.");
+    }
+    return pathname -> pathname.isDirectory() || pathname.getPath().matches(filesPathPattern);
   }
 
   private void formatSourceFile(File file, Formatter formatter) {

@@ -156,6 +156,13 @@ public class FMTTest {
     check.execute();
   }
 
+  @Test
+  public void checkSucceedsWhenNotFormattedButIgnored() throws Exception {
+    Check check =
+        (Check) mojoRule.lookupConfiguredMojo(loadPom("check_notformatted_ignored"), CHECK);
+    check.execute();
+  }
+
   private File loadPom(String folderName) {
     return new File("src/test/resources/", folderName);
   }
