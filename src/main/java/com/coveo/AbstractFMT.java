@@ -199,7 +199,8 @@ public abstract class AbstractFMT extends AbstractMojo {
     return pathname -> pathname.isDirectory() || pathname.getPath().matches(filesPathPattern);
   }
 
-  private boolean formatSourceFile(File file, Formatter formatter, JavaFormatterOptions.Style style) {
+  private boolean formatSourceFile(
+      File file, Formatter formatter, JavaFormatterOptions.Style style) {
     if (file.isDirectory()) {
       getLog().info("File '" + file + "' is a directory. Skipping.");
       return true;
@@ -261,6 +262,7 @@ public abstract class AbstractFMT extends AbstractMojo {
    *
    * @param file the file that is not compliant
    * @param formatted the corresponding formatted of the file.
+   * @throws IOException on any
    */
   protected abstract void onNonComplyingFile(File file, String formatted) throws IOException;
 
