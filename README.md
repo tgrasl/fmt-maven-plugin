@@ -177,6 +177,9 @@ You can pass parameters via standard `-D` syntax.
 
 `-Dfmt.skip` is whether the plugin should skip the operation.
 
+### Using with Java 8
+
+Starting from version 1.8, Google Java Formatter requires Java 11 to run. Incidently, all versions of this plugin starting from 2.10 inclusively also require this Java version to properly function. The 2.9.x release branch is the most up-to-date version that still runs on Java 8.
 
 ### Deploy
 
