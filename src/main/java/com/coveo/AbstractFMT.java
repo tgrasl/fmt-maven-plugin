@@ -3,7 +3,6 @@ package com.coveo;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSource;
 import com.google.googlejavaformat.java.*;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -23,17 +22,15 @@ import org.apache.maven.plugins.annotations.Parameter;
 public abstract class AbstractFMT extends AbstractMojo {
 
   @Parameter(
-    defaultValue = "${project.build.sourceDirectory}",
-    property = "sourceDirectory",
-    required = true
-  )
+      defaultValue = "${project.build.sourceDirectory}",
+      property = "sourceDirectory",
+      required = true)
   private File sourceDirectory;
 
   @Parameter(
-    defaultValue = "${project.build.testSourceDirectory}",
-    property = "testSourceDirectory",
-    required = true
-  )
+      defaultValue = "${project.build.testSourceDirectory}",
+      property = "testSourceDirectory",
+      required = true)
   private File testSourceDirectory;
 
   @Parameter(defaultValue = "${project.packaging}", required = true)
@@ -147,9 +144,7 @@ public abstract class AbstractFMT extends AbstractMojo {
       FileFilter fileNameFilter = getFileNameFilter();
       FileFilter pathFilter = getPathFilter();
       long failures =
-          paths
-              .collect(Collectors.toList())
-              .parallelStream()
+          paths.collect(Collectors.toList()).parallelStream()
               .filter(p -> p.toFile().exists())
               .map(Path::toFile)
               .filter(fileNameFilter::accept)
