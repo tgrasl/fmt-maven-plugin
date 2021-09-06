@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/coveo/fmt-maven-plugin.svg?branch=master)](https://travis-ci.org/coveo/fmt-maven-plugin)
-[![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/coveo/fmt-maven-plugin/blob/master/LICENSE)
+[![Build Status](https://github.com/coveooss/fmt-maven-plugin/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/coveooss/fmt-maven-plugin/actions/workflows/ci.yml?query=branch%3Amaster)
+[![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/coveooss/fmt-maven-plugin/blob/master/LICENSE)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.coveo/fmt-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.coveo/fmt-maven-plugin)
 
 ## fmt-maven-plugin 
@@ -8,10 +8,7 @@ Formats your code using [google-java-format](https://github.com/google/google-ja
 
 The format cannot be configured by design.
 
-If you want your IDE to stick to the same format, check out [the available configuration files](https://github.com/google/styleguide)
-
-* [Eclipse](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml)
-* [IntelliJ IDEA](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)
+If you want your IDE to stick to the same format, google-java-format also includes integrations for IntelliJ and Eclipse IDE's, following the installation instructions on the [README](https://github.com/google/google-java-format/blob/master/README.md#using-the-formatter).
 
 ## Usage
 
@@ -25,7 +22,7 @@ To have your sources automatically formatted on each build, add to your pom.xml:
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.9</version>
+                <version>2.12</version>
                 <executions>
                     <execution>
                         <goals>
@@ -46,7 +43,7 @@ If you prefer, you can only check formatting at build time using the `check` goa
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.9</version>
+                <version>2.12</version>
                 <executions>
                     <execution>
                         <goals>
@@ -84,7 +81,7 @@ example:
         <plugin>
             <groupId>com.coveo</groupId>
             <artifactId>fmt-maven-plugin</artifactId>
-            <version>2.9</version>
+            <version>2.12</version>
             <configuration>
                 <sourceDirectory>some/source/directory</sourceDirectory>
                 <testSourceDirectory>some/test/directory</testSourceDirectory>
@@ -127,7 +124,7 @@ example to not display the non-compliant files:
         <plugin>
             <groupId>com.coveo</groupId>
             <artifactId>fmt-maven-plugin</artifactId>
-            <version>2.9</version>
+            <version>2.12</version>
             <configuration>
                 <displayFiles>false</displayFiles>
             </configuration>
@@ -150,7 +147,7 @@ example to limit the display up to 10 files
         <plugin>
             <groupId>com.coveo</groupId>
             <artifactId>fmt-maven-plugin</artifactId>
-            <version>2.9</version>
+            <version>2.12</version>
             <configuration>
                 <displayLimit>10</displayLimit>
             </configuration>
@@ -177,6 +174,9 @@ You can pass parameters via standard `-D` syntax.
 
 `-Dfmt.skip` is whether the plugin should skip the operation.
 
+### Using with Java 8
+
+Starting from version 1.8, Google Java Formatter requires Java 11 to run. Incidently, all versions of this plugin starting from 2.10 inclusively also require this Java version to properly function. The 2.9.x release branch is the most up-to-date version that still runs on Java 8.
 
 ### Deploy
 

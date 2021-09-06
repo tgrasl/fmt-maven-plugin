@@ -1,9 +1,0 @@
-language: java
-jdk:
-- oraclejdk8
-cache:
-  directories:
-  - "$HOME/.m2/repository"
-test:
-- mvn versions:display-dependency-updates
-- mvn test

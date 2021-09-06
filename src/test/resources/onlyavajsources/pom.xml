@@ -13,7 +13,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>2.12</version>
                 <configuration>
                     <additionalSourceDirectories>
                         <directory>${project.basedir}/src/additionalfolder</directory>
