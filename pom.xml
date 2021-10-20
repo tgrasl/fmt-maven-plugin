@@ -1,10 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.coveo</groupId>
+    <groupId>ch.sbb.nets.maven</groupId>
     <artifactId>fmt-maven-plugin</artifactId>
-    <version>2.12</version>
+    <version>2.12-NETS</version>
     <packaging>maven-plugin</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -49,14 +49,14 @@
     </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>mvn</id>
+            <url>https://bin.sbb.ch/artifactory/nets.mvn/</url>
         </repository>
+        <snapshotRepository>
+            <id>mvn</id>
+            <url>https://bin.sbb.ch/artifactory/nets.mvn/</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <properties>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>com.google.googlejavaformat</groupId>
             <artifactId>google-java-format</artifactId>
-            <version>1.11.0</version>
+            <version>1.9-NETS-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -139,18 +139,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.coveo</groupId>
-                <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.12</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
@@ -161,6 +149,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <profiles>
         <profile>
